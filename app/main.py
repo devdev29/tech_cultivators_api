@@ -1,5 +1,6 @@
 import base64
 import io
+import json
 import numpy
 from flask import Flask, request
 import flask
@@ -34,7 +35,9 @@ def get_bhaav():
                 final_bhaav['qty'].append(bhaav.find_all('td')[1].text)
                 final_bhaav['price'].append(bhaav.find_all('td')[3].text)
         
-        return flask.jsonify(final_bhaav)
+        final_bhaav=flask.jsonify(final_bhaav)
+        final_bhaav.headers.add('Access-Control-Allow-Origin', '*')
+        return final_bhaav
 
 @app.route('/plant_disease',methods=['GET','POST'])
 def detect_disease():
@@ -54,4 +57,7 @@ def detect_disease():
         with open('../labels.txt') as lfile:
                 for line in lfile.readlines():
                         if prediction.argmax() in line.split(' '):
-                                return line.split(' ')[1]
+                                resp={'disease':line.split(' ')[1]}
+        resp=flask.jsonify(resp)
+        resp.headers.add('Access-Control-Allow-Origin', '*')
+        return resp

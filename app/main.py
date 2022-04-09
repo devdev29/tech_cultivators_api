@@ -55,23 +55,3 @@ def detect_disease():
                 for line in lfile.readlines():
                         if prediction.argmax() in line.split(' '):
                                 return line.split(' ')[1]
-
-in_image= Image.open('C:/Users/avita/ag_models/plant_disease_detection/train/Corn___Common_rust/image (4).JPG')
-model=Interpreter('./app/model/beta_plant_disease.tflite')
-in_image = in_image.resize((128,128))
-in_image=numpy.array(in_image).astype(numpy.float32)
-in_image=in_image/255.0
-in_image=numpy.expand_dims(in_image, axis=0)
-model.allocate_tensors()
-
-input_details=model.get_input_details()
-output_details=model.get_output_details()
-
-model.set_tensor(input_details[0]['index'], in_image)
-model.invoke()
-
-prediction=model.get_tensor(output_details[0]['index'])
-with open('./labels.txt') as lfile:
-        for line in lfile.readlines():
-                if prediction.argmax() == int(line.split(' ')[0]):
-                        print(line.split(' ')[1])

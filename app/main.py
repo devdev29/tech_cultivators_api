@@ -42,7 +42,7 @@ def get_bhaav():
 def detect_disease():
         b64_image=request.get_json()
         in_image=get_from_b64(b64_image)
-        model=Interpreter('model/beta_plant_disease.tflite')
+        model=Interpreter('./model/beta_plant_disease.tflite')
         model.allocate_tensors()
 
         input_details=model.get_input_details()

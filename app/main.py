@@ -13,6 +13,7 @@ app = Flask(__name__)
 CORS(app)
 
 def get_from_b64(b64_string):
+    b64_string=str(b64_string)    
     face_bytes = bytes(b64_string, 'utf-8')
     face_bytes = face_bytes[face_bytes.find(b'/9'):]
     im = Image.open(io.BytesIO(base64.b64decode(face_bytes)))

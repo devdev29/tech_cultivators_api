@@ -52,7 +52,7 @@ def detect_disease():
         model.invoke()
 
         prediction=model.get_tensor(output_details[0]['index'])
-        with open('./app/labels.txt') as lfile:
+        with open('./labels.txt') as lfile:
                 for line in lfile.readlines():
                         if prediction.argmax() == int(line.split(' ')[0]):
                                 resp={'disease':line.split(' ')[1]}

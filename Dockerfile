@@ -13,4 +13,4 @@ EXPOSE 8080
 
 USER 1000
 
-CMD ["gunicorn", "main:app", "--host", "0.0.0.0", "--port", "8080"]
+CMD ["gunicorn", "main:app"]

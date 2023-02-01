@@ -55,8 +55,8 @@ def detect_disease():
         prediction=model.get_tensor(output_details[0]['index'])
         with open('./labels.txt') as lfile:
                 for line in lfile.readlines():
-                        if prediction.argmax() == int(line.split(' ')[0]):
-                                resp={'disease':line.split(' ')[1]}
+                        if prediction.argmax() == int(line.split()[0]):
+                                resp={'plant':line.split()[1], 'disease':line.split()[2]}
         resp=flask.jsonify(resp)
         resp.headers.add('Access-Control-Allow-Origin', '*')
         return resp

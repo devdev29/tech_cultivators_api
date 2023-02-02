@@ -1,6 +1,6 @@
 0 Apple Apple_scab
 1 Apple Black_rot
-2 Apple Cedar_apple_rust
+2 Apple Cedar apple rust
 3 Apple healthy
 4 no_plant no_disease
 5 Corn Cercospora_leaf_spot Gray_leaf_spot

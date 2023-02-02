@@ -4,8 +4,6 @@ import numpy
 from flask import Flask, request
 import flask
 from flask_cors import CORS
-import requests
-from bs4 import BeautifulSoup
 from PIL import Image
 from tflite_runtime.interpreter import Interpreter
 
@@ -22,22 +20,6 @@ def get_from_b64(b64_string):
     im=im/255.0
     im=numpy.expand_dims(im, axis=0)
     return im
-
-@app.route('/bazaar_bhav',methods=['GET'])
-def get_bhaav():
-        bazaar_page=requests.get('https://msamb.com/').content
-        souped_page=BeautifulSoup(bazaar_page, 'html.parser')
-        final_bhaav={'commodity':[], 'qty':[], 'price':[]}
-        bhaav_html=souped_page.find_all(name='tr')[1:]
-
-        for bhaav in bhaav_html:
-                final_bhaav['commodity'].append(bhaav.find_all('td')[0].text)
-                final_bhaav['qty'].append(bhaav.find_all('td')[1].text)
-                final_bhaav['price'].append(bhaav.find_all('td')[3].text)
-        
-        final_bhaav=flask.jsonify(final_bhaav)
-        final_bhaav.headers.add('Access-Control-Allow-Origin', '*')
-        return final_bhaav
 
 @app.route('/plant_disease',methods=['GET','POST'])
 def detect_disease():

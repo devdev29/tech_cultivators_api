@@ -13,4 +13,4 @@ EXPOSE 8080
 
 USER 1000
 
-CMD ["gunicorn", "app:main"]
+CMD ["gunicorn", "wsgi:app"]

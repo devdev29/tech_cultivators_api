@@ -24,7 +24,7 @@ def get_from_b64(b64_string):
 @app.route('/plant_disease',methods=['GET','POST'])
 def detect_disease():
         b64_image=request.get_json()
-        in_image=get_from_b64(b64_image)
+        in_image=get_from_b64(b64_image.get('img'))
         model=Interpreter('./app/model/beta_plant_disease.tflite')
         model.allocate_tensors()
 
